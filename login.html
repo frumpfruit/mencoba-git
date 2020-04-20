@@ -1,1 +1,88 @@
-# mencoba-git
+<?php
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="./CSS/form.css">
+<link rel="stylesheet" type="text/css" href="./CSS/form.js">
+
+</head>
+<body>
+<?php
+include"connection.php";
+
+// ambil data berdasar id pegawai
+$no_pembayaran = $_GET['no_pembayaran'];
+$sql = "SELECT * FROM pemasukan where no_pembayaran='".$no_pembayaran."' ";
+$result = mysqli_query($conn, $sql);
+while($row = mysqli_fetch_array($result))
+{
+	$data = $row;
+}
+
+
+?>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+	<div class="row">
+	
+        <!-- panel preview -->
+<center>
+<form action="./kode_update_pemasukan.php" method="POST">
+        <div class="col-sm-5">
+            <h4>Silahkan mengubah:</h4>
+            <div class="panel panel-default">
+                <div class="panel-body form-horizontal payment-form">
+                    <div class="form-group">
+                        <label for="concept" class="col-sm-3 control-label">Dari:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="Dari" name="dari" value="<?=$data['dari']?>" required=>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="concept" class="col-sm-3 control-label">No pembayaran:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="Dari" name="no_pembayaran" value="<?=$data['no_pembayaran']?>" required=>
+                        </div>
+                    </div>
+						<div class="form-group">
+                        <label for="description" class="col-sm-3 control-label">ID santri:</label>
+
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="description" name="Id_santri" value="<?=$data['id_santri']?>"required=>
+                        </div>
+                    </div> 
+					<div class="form-group">
+                        <label for="date" class="col-sm-3 control-label">Date :</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" id="date" name="tgl_masuk" value="<?=$data['tgl_masuk']?>" required=>
+                        </div>
+                    </div>   
+                    
+                    <div class="form-group">
+                        <label for="amount" class="col-sm-3 control-label">Amount :</label>
+                        <div class="col-sm-9">
+                            <input type="number"  step="500" class="form-control" id="amount" name="jml_masuk"  value="<?=$data['jml_masuk']?>" required=>
+                        </div>
+                    </div>
+				
+                    
+                    <div class="form-group">
+                        <div class="col-sm-12 text-right">
+                            <button type="submit" class="btn btn-default preview-add-button">
+                                <span class="glyphicon glyphicon-plus"></span> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div> <!-- / panel preview -->
+     </div>
+	</div>
+	</form>
+</center>
+</body>
+
+</html>
+
+
+?>
